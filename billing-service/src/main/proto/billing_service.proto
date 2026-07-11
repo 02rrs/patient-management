@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+// Tell Maven to generate separate Java files for requests, responses, and the server stub
+option java_multiple_files = true;
+
+// The Java package where the generated code will be placed
+option java_package = "billing";
+
+// 1. The Service Definition (Like a Spring @RestController)
+service BillingService {
+  rpc CreateBillingAccount (BillingRequest) returns (BillingResponse);
+}
+
+// 2. The Request Payload (Like a Request DTO)
+message BillingRequest {
+  // Note: 1, 2, and 3 are NOT values. They are unique binary tags used for serialization.
+  string patientId = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// 3. The Response Payload (Like a Response DTO)
+message BillingResponse {
+  string accountId = 1;
+  string status = 2;
+}
